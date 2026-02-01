@@ -3,7 +3,7 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -38,5 +38,27 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+
+
+
+  .containers {
+    home: {
+      padding: 20px;
+      background-color: #121212;
+    }
+
+    main: {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    title: {
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
+    h1: {
+      font-weight: 600;
+    }
   }
 }

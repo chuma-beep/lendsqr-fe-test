@@ -1,0 +1,296 @@
+@use "./global" as g;
+
+$bg-color: #ffffff;
+
+.container {
+  padding: clamp(1rem, 10vmin, 6rem);
+  padding-bottom: 0;
+  font-family: g.$avenir-regular;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-color;
+}
+.logo {
+  width: clamp(120px, 20%, 175px);
+}
+.mainbox {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.illustration {
+  height: 36px;
+  width: clamp(300px, 50%, 1000px);
+  align-self: center;
+  height: 100%;
+}
+.form_container {
+  padding: clamp(1rem, 10vmin, 6rem);
+  height: 100%;
+  width: clamp(200px, 50%, 800px);
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-family: g.$avenir-bold;
+    color: g.$h1-color;
+    font-size: 40px;
+  }
+
+  .subheading {
+    font-family: g.$avenir-regular;
+    color: g.$secondary-text-color;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .error {
+    font-size: 12px;
+    color: rgba(255, 56, 56, 0.978);
+    margin-top: 6px;
+  }
+
+  form {
+    flex: 1;
+    margin-top: 60px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .email {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid #545F7D26;
+      border-radius: 5px;
+
+      input {
+        width: 100%;
+        border: none;
+        padding: 16px;
+        font-size: 14px;
+        font-family: g.$avenir-regular;
+        outline-color: g.$tertiary-text-color;
+        background-color: transparent;
+        color: g.$primary-text-color;
+      }
+      button {
+        position: absolute;
+        right: 16px;
+        top: 0;
+        height: 100%;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-family: g.$avenir-regular;
+        color: g.$tertiary-text-color;
+      }
+
+
+       &:hover,
+       &:focus {
+       border-color: g.$tertiary-text-color;
+     } 
+
+
+      &:active {
+      border-color: none;
+      outline: none;
+    }
+
+    }
+
+    .password {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      border: 2px solid #545F7D26;
+      border-radius: 5px;
+
+      input {
+        width: 100%;
+        border: none;
+        padding: 16px 65px 16px 16px;
+        font-size: 14px;
+        font-family: g.$avenir-regular;
+        outline-color: g.$tertiary-text-color;
+        background-color: transparent;
+        color: g.$primary-text-color;
+      }
+      button {
+        position: absolute;
+        right: 16px;
+        top: 0;
+        height: 100%;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-family: g.$avenir-regular;
+        color: g.$tertiary-text-color;
+        cursor: pointer;
+      }
+    }
+
+    .forgot_password {
+      font-size: 12px;
+      color: g.$tertiary-text-color;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .login_btn {
+      display: block;
+      color: g.$white;
+      font-weight: 600;
+      padding: 13px;
+      border: none;
+      background-color: g.$tertiary-text-color;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: g.$avenir-regular;
+      font-weight: 600;
+    }
+  
+      &:hover,
+       &:focus {
+       border-color: g.$tertiary-text-color;
+     } 
+
+
+      &:active {
+      border-color: none;
+      outline: none;
+    }
+}
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: clamp(1rem, 5vmin, 3rem);
+  }
+  .form_container {
+    padding: clamp(1rem, 5vmin, 3rem) 0;
+    flex: none;
+    width: 50%;
+  }
+  .illustration {
+    height: 36px;
+    width: clamp(300px, 50%, 1000px);
+    align-self: center;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mainbox {
+    flex-direction: column;
+  }
+  .illustration {
+    width: clamp(150px, 100%, 300px);
+    margin: 5vh 0 0;
+  }
+
+  .form_container {
+    padding: 0 0 clamp(1rem, 5vmin, 3rem) 0;
+    flex: none;
+    width: clamp(180px, 90%, 320px);
+    margin: auto;
+
+    h1 {
+      font-size: 25px;
+    }
+    p {
+      font-size: 15px;
+    }
+    .error {
+      font-size: 12px;
+      color: red;
+    }
+
+    form {
+      flex: 1;
+      margin-top: 30px;
+
+      .email {
+        position: relative;
+        width: 100%;
+        background: #ffffff;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        border-radius: 5px;
+
+        input {
+          width: 100%;
+          border: none;
+          padding: 16px;
+          font-size: 14px;
+          font-family: g.$avenir-regular;
+          outline-color: g.$tertiary-text-color;
+        }
+        button {
+          position: absolute;
+          right: 16px;
+          top: 0;
+          height: 100%;
+          border: none;
+          background: transparent;
+          font-weight: 600;
+          font-family: g.$avenir-regular;
+          color: g.$tertiary-text-color;
+        }
+      }
+
+      .password {
+        position: relative;
+        width: 100%;
+        background: #ffffff;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        border-radius: 5px;
+
+        input {
+          width: 100%;
+          border: none;
+          padding: 16px 65px 16px 16px;
+          font-size: 14px;
+          font-family: g.$avenir-regular;
+          outline-color: g.$tertiary-text-color;
+        }
+        button {
+          position: absolute;
+          right: 16px;
+          top: 0;
+          height: 100%;
+          border: none;
+          background: transparent;
+          font-weight: 600;
+          font-family: g.$avenir-regular;
+          color: g.$tertiary-text-color;
+        }
+      }
+
+      .forgot_password {
+        font-size: 12px;
+        color: g.$tertiary-text-color;
+        font-weight: 600;
+      }
+
+      .login_btn {
+        display: block;
+        color: g.$white;
+        font-weight: 600;
+        padding: 13px;
+        border: none;
+        background-color: g.$tertiary-text-color;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: g.$avenir-regular;
+        font-weight: 600;
+      }
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  // .illustration {
+  //   display: none;
+  // }
+}

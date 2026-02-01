@@ -1,0 +1,34 @@
+// Font variables
+$avenir-regular: 'Avenir', Arial, sans-serif;
+$avenir-bold: 'Avenir Bold', Arial, sans-serif;
+
+// Color variables
+$primary-text-color: #171717;
+$secondary-text-color: #545f7d;
+$tertiary-text-color: #39cdcc;
+$white: #ffffff;
+$h1-color: #213F7D;
+
+// Mixins for scrollbars
+@mixin custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $tertiary-text-color transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $tertiary-text-color;
+    border-radius: 4px;
+  }
+}
+
+@mixin mozilla-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $tertiary-text-color transparent;
+}
