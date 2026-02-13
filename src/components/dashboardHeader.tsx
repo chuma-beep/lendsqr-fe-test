@@ -4,9 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "../styles/dashboard-header.module.scss";
-// Using public assets directly in img tags instead of imports
 
-export default function DashboardHeader() {
+interface DashboardHeaderProps {
+  onMenuToggle?: () => void;
+  showMenuBtn?: boolean;
+  sidebarOpen?: boolean;
+}
+
+export default function DashboardHeader({ onMenuToggle, showMenuBtn, sidebarOpen }: DashboardHeaderProps) {
   const router = useRouter();
 
   return (
@@ -59,6 +64,19 @@ export default function DashboardHeader() {
             unoptimized
           />
         </div>
+        {showMenuBtn && (
+          <button className={styles.menu_btn} onClick={onMenuToggle} title={sidebarOpen ? "Close Menu" : "Open Menu"}>
+            {sidebarOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="#213F7D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M3 6H21M3 18H21" stroke="#213F7D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

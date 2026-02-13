@@ -77,15 +77,10 @@ const Dashboard = () => {
   ] = useState(
     Math.ceil(users.length / parseInt(String(paginatedResults), 10))
   );
-  const [navMenuBtn, setNavMenuBtn] = useState(true);
-  const [navState, setNavState] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setNavMenuBtn(window.innerWidth < 1080);
-      setNavState(window.innerWidth >= 1080);
-    }
-  }, []);
+
+  const updatePaginatedResults: CallableFunction = (value: string) =>
+    setPaginatedResults(value);
 
   const paging: (number | string)[] = useMemo(() => {
     let pagingArray: any = [1, 2, "...", 9, 10];
@@ -102,11 +97,6 @@ const Dashboard = () => {
 
     return pagingArray;
   }, [pageNumber]);
-
-  const handleMenuBtn: Function = (): void => setNavState(!navState);
-
-  const updatePaginatedResults: CallableFunction = (value: string) =>
-    setPaginatedResults(value);
 
   // Event listeners for filter and user popup menu
   useEffect(() => {
@@ -148,23 +138,6 @@ const Dashboard = () => {
         userMenu.menuIsOpen === true &&
           !path.some((element) => element?.id === "user_menu_btn") &&
           setUserMenu({ menuId: null, menuIsOpen: false });
-      });
-    };
-  }, []);
-
-  // Automatically set sidebar state
-  useEffect(() => {
-    window.addEventListener("resize", (e: UIEvent) => {
-      const w = e.target as Window;
-      setNavMenuBtn(w.innerWidth < 1080 ? true : false);
-      setNavState(window.innerWidth > 1080 ? true : false);
-    });
-
-    return () => {
-      window.removeEventListener("resize", (e: UIEvent) => {
-        const w = e.target as Window;
-        setNavMenuBtn(w.innerWidth < 1080 ? true : false);
-        setNavState(window.innerWidth > 1080 ? true : false);
       });
     };
   }, []);
@@ -217,24 +190,9 @@ const Dashboard = () => {
           <p>{error}</p>
         </div>
       )}
-      {/* Display dashboard  */}
+{/* Display dashboard  */}
       {users && users.length > 0 && (
         <div className={styles.superior_cont}>
-          {navMenuBtn && (
-            <button
-              className={styles.menu_btn}
-              onClick={() => handleMenuBtn()}
-              title="Menu"
-            >
-              <Image
-               src="/dashboard/menu-btn.svg"
-                alt="menu button"
-                width={50}
-                height={50}
-                unoptimized
-                />
-            </button>
-          )}
           <div className={styles.container} ref={pageRef}>
             <p className={styles.page_title}>Users</p>
 

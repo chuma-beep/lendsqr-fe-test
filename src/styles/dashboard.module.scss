@@ -5,6 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 20px;
+  position: relative;
 
   @media (min-width: 768px) {
     padding: 40px 40px 200px 40px;
@@ -12,6 +13,47 @@
 
   @media (min-width: 1024px) {
     padding: 60px 60px 250px 60px;
+  }
+}
+
+.menu_btn {
+  position: fixed;
+  right: 20px;
+  top: 90px;
+  width: 50px;
+  height: 50px;
+  background: g.$white;
+  z-index: 1001;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(g.$secondary-text-color, 0.06);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 300ms ease;
+
+  @media (min-width: 1080px) {
+    display: none;
+  }
+
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+
+.sidebar_overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 280px;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  @media (max-width: 1079px) {
+    display: block;
   }
 }
 
