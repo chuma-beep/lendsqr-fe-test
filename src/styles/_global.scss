@@ -1,34 +1,52 @@
-// Font variables
-$avenir-regular: 'Avenir', Arial, sans-serif;
-$avenir-bold: 'Avenir Bold', Arial, sans-serif;
+@font-face {
+  font-family: Avenir-bold;
+  src: url("../assets/fonts/Avenir-Bold.otf");
+}
+@font-face {
+  font-family: Avenir-italic;
+  src: url("../assets/fonts/Avenir-It.otf");
+}
+@font-face {
+  font-family: Avenir-regular;
+  src: url("../assets/fonts/Avenir-Regular.otf");
+}
 
-// Color variables
-$primary-text-color: #171717;
+$work-sans: "Work Sans", sans-serif;
+$avenir-regular: Avenir-regular;
+$avenir-italic: Avenir-italic;
+$avenir-bold: Avenir-bold;
+$primary-text-color: #213f7d;
+$primary-text-color-light: rgba(#213f7d, 0.4);
 $secondary-text-color: #545f7d;
 $tertiary-text-color: #39cdcc;
+$red-text-color: #e4033b;
+$active-nav-bg: rgba(#39cdcc, 0.06);
+$primary-hover-bg: rgba(#39cdcc, 0.06);
+$secondary-hover-bg: rgba(#545f7d, 0.06);
+$dashboard-bg: #fbfbfb;
 $white: #ffffff;
-$h1-color: #213F7D;
+$black: #000000;
+$h1-color: #213f7d;
+$h2-color: #545f7d;
+$h3-color: #212b36;
+$border-color: rgba(#213f7d, 0.1);
 
-// Mixins for scrollbars
+@mixin mozilla-scrollbar {
+  scrollbar-width: none;
+}
 @mixin custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: $tertiary-text-color transparent;
-
   &::-webkit-scrollbar {
-    width: 8px;
+    display: none;
   }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $tertiary-text-color;
-    border-radius: 4px;
+}
+@mixin tabs-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-@mixin mozilla-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: $tertiary-text-color transparent;
+.root {
+  max-width: 1440px;
+  margin: auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }

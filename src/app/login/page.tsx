@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "../../styles/login.module.scss";
 import Image from "next/image";
-import illustration from "../../assets/illustration.svg";
+import styles from "../../styles/login.module.scss";
+
 
 const Login = () => {
   const router = useRouter();
@@ -64,10 +64,11 @@ const Login = () => {
       <div className={styles.mainbox}>
         <Image
           className={styles.illustration}
-          src={illustration}
+          src="/illustration.svg"
           width={400}
           height={300}
           alt="login illustration"
+          unoptimized
         />
         <div className={styles.form_container}>
           <h1>Welcome!</h1>

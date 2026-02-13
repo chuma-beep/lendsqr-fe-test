@@ -1,33 +1,37 @@
-import { ReactElement, useState } from "react";
-import styles from "./styles/navbar.module.scss";
-import navbarData from "../data/navbarLinks.json";
-import { Link } from "react-router-dom";
+"use client";
 
-const Navbar = ({ navState }: { navState: boolean }): ReactElement => {
+import { ReactElement, useState } from "react";
+import styles from "../styles/sidebar.module.scss";
+import sidebarData from "../data/sidebarLinks.json";
+import Link from "next/link";
+import Image from "next/image";
+
+const Sidebar = ({ navState }: { navState: boolean }): ReactElement => {
   return (
     <div
-      className={navState ? styles.container : styles.nav_closed}
-      data-testid="navbar"
+      className={navState ? styles.container : styles.sidebar_closed}
+      data-testid="sidebar"
     >
       <div className={styles.uppersection}>
         <div className={styles.section_navlink_org}>
-          <img
+          <img 
             className={styles.icon}
-            src={`/navbar/switch-organization.svg`}
+            src={`/sidebar/switch-organization.svg`}
+            alt="switch organization"
           />
           <p>Switch Organization</p>
-          <img className={styles.icon} src={`/navbar/caret-down.svg`} />
+          <img className={styles.icon} src={`/sidebar/caret-down.svg`} alt="dropdown" />
         </div>
         <div className={styles.section_navlink}>
-          <img className={styles.icon} src={`/navbar/dashboard.svg`} />
+          <img className={styles.icon} src={`/sidebar/dashboard.svg`} alt="dashboard" />
           <p>Dashboard</p>
         </div>
       </div>
 
-      {Object.entries(navbarData).map((navSection, index) => (
+      {Object.entries(sidebarData).map((navSection: [string, string[]], index) => (
         <div key={index} className={styles.section}>
           <p className={styles.section_header}>{navSection[0]}</p>
-          {navSection[1].map((navLink, ind) => (
+          {navSection[1].map((navLink: string, ind: number) => (
             <div
               key={navLink}
               className={
@@ -36,12 +40,15 @@ const Navbar = ({ navState }: { navState: boolean }): ReactElement => {
                   : styles.section_navlink
               }
             >
-              <img
+              <Image
+                  width={10}
+                  height={15}
                 className={styles.icon}
-                src={`/navbar/${navLink
+                src={`/sidebar/icons/${navLink
                   .toLowerCase()
                   .split(" ")
-                  .join("-")}.svg`}
+                  .join("-")}.png`}
+                alt={navLink}
               />
 
               <p>{navLink}</p>
@@ -51,8 +58,13 @@ const Navbar = ({ navState }: { navState: boolean }): ReactElement => {
       ))}
       <hr className={styles.divider} />
       <div className={styles.section_navlink_org}>
-        <img className={styles.icon} src={`/navbar/logout.svg`} />
-        <Link to={"/login"}>
+        <Image
+         className={styles.icon}
+          src={`/sidebar/logout.svg`} 
+           height={20}
+           width={20}
+          alt="logout" />
+        <Link href={"/login"}>
           <p className={styles.logout}>Logout</p>
         </Link>
       </div>
@@ -61,4 +73,4 @@ const Navbar = ({ navState }: { navState: boolean }): ReactElement => {
   );
 };
 
-export default Navbar;
+export default Sidebar;

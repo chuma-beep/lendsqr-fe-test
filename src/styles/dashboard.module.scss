@@ -1,18 +1,22 @@
-@use "./global.scss" as g;
+@use "./global" as g;
 
 .superior_cont {
-  width: calc(100% - clamp(240px, calc(283px / 1440px * 100%), 500px));
   background: g.$dashboard-bg;
   flex: 1;
   height: fit-content;
+  padding: calc(60px / 1440px * 100%) calc(60px / 1440px * 100%)
+    calc(250px / 1440px * 100%) calc(60px / 1440px * 100%);
 }
 
 .container {
   position: relative;
-  padding: calc(60px / 1440px * 100%) calc(60px / 1440px * 100%)
-    calc(250px / 1440px * 100%) calc(60px / 1440px * 100%);
   font-family: g.$work-sans;
   color: g.$primary-text-color;
+}
+
+.main_content {
+  display: flex;
+  min-height: calc(100vh - 100px);
 }
 
 .menu_btn {

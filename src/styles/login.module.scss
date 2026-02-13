@@ -1,6 +1,8 @@
 @use "./global" as g;
 
 $bg-color: #ffffff;
+$h1-color: #213f7d;
+$h2-color: #545f7d;
 
 .container {
   padding: clamp(1rem, 10vmin, 6rem);
@@ -34,7 +36,7 @@ $bg-color: #ffffff;
 
   h1 {
     font-family: g.$avenir-bold;
-    color: g.$h1-color;
+    color: $h1-color;
     font-size: 40px;
   }
 
