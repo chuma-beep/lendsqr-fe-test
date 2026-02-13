@@ -1,3 +1,44 @@
+@use "sass:map";
+
+$color-white: #ffffff;
+$color-dark-blue: #213f7d;
+$color-faded-blue: #545f7d;
+$color-sky-blue: #39cdcc;
+$color-dark: #000000;
+
+$breakpoints: (
+  '2xs': 320px,
+  'xxs': 375px,
+  'xs': 425px,
+  'sm': 640px,
+  'md': 768px,
+  'base': 1024px,
+  'lg': 1280px
+);
+
+@mixin media($breakpoint, $direction: '>') {
+  $size: map.get($breakpoints, $breakpoint);
+  
+  @if $direction == '>' {
+    @media (min-width: $size) {
+      @content;
+    }
+  } @else {
+    @media (max-width: #{$size - 1px}) {
+      @content;
+    }
+  }
+}
+
+%font-12 { font-size: 12px; }
+%font-14 { font-size: 14px; }
+%font-16 { font-size: 16px; }
+%font-22 { font-size: 22px; }
+%font-24 { font-size: 24px; }
+
+@import './Users/Details/style';
+@import './Users/Details/General/style';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

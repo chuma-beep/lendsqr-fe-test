@@ -12,7 +12,7 @@ const FilterForm: React.FC<filterProps> = ({ left, children }) => {
   const [date, setDate] = useState("Date");
   const [phoneNumber, setPhoneNumber] = useState<number | string>();
   const [status, setStatus] = useState("");
-  const filterFormRef: any = useRef();
+  const filterFormRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
 
   const resetForm: Function = (): void => {
     setOrganization("");

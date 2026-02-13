@@ -1,4 +1,9 @@
-export type pageNumberState = [number, (value: number) => void];
+export type AccountStatus = {
+  backgroundColor: string;
+  color: string;
+};
+
+export type pageNumberState = [number, (value: number | ((prev: number) => number)) => void];
 export type userMenuState = [userMenuObject, (value: userMenuObject) => void];
 export type userMenuObject = {
   menuId: null | number;
@@ -8,6 +13,8 @@ export type filterProps = {
   left: number;
   children?: React.ReactNode;
 };
+export type userDetailsState = [object | null, (value: object | null) => void];
+export type usersState = [object[], (value: object[]) => void];
 
 export type userObject = {
   createdAt: string;

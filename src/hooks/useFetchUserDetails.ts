@@ -9,12 +9,10 @@ export const useFetchUserDetails: Function = (userId: number): object => {
   const [userDetails, setUserDetails]: userDetailsState = useState<
     object | null
   >(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // reset states
-    setIsLoading(false);
     setError("");
 
     const fetchAllUsers: Function = (id: number): void => {
@@ -45,7 +43,7 @@ export const useFetchUserDetails: Function = (userId: number): object => {
     };
 
     Object.keys(cachedUserDetails).length
-      ? setUserDetails(cachedUserDetails)
+      ? (setUserDetails(cachedUserDetails), setIsLoading(false))
       : fetchAllUsers(userId);
   }, []);
 

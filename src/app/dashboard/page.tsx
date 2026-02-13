@@ -1,7 +1,6 @@
 "use client";
 
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import DashboardLayout from "../../layouts/DashboardLayout";
 import styles from "../../styles/dashboard.module.scss";
 import { useFetchUsers } from "../../hooks/useFetchUsers";
 import Link from "next/link";
@@ -17,6 +16,7 @@ import UserStatus from "../../components/userStatus";
 import { formatDate, handleUserMenu } from "../../lib/dashboard";
 import Dropdown from "../../components/dropDown";
 import FilterForm from "../../components/filterForm";
+import Skeleton, { SkeletonTable } from "@/components/Skeleton";
 
 const Dashboard = () => {
   const [pageNumber, setPageNumber]: pageNumberState = useState(1);
@@ -27,21 +27,30 @@ const Dashboard = () => {
   const [paginatedResults, setPaginatedResults]: [
     resultsPerPage: number | string,
     setResultsPerPage: Function
-  ] = useState(localStorage.getItem("resultsPerPage") || 10);
+  ] = useState<number | string>(10);
   const [showFilter, setShowFilter] = useState<{
     currentTab: string;
     showFilter: boolean;
   }>({ currentTab: "", showFilter: false });
   const currentUserMenuIndex: { current: null | number } = useRef(null);
   const filterPosition = useRef(20);
-  const pageRef: any = useRef(null);
-  const [usersToDisplay, setUsersToDisplay] = useState([]);
+  const pageRef = useRef<HTMLDivElement>(null);
+  const [usersToDisplay, setUsersToDisplay] = useState<userObject[]>([]);
   const { users, pages, isLoading, error } = useFetchUsers();
+
+  useEffect(() => {
+    const stored = localStorage.getItem("resultsPerPage");
+    if (stored) {
+      setPaginatedResults(stored);
+    }
+  }, []);
 
   const handleFilter: Function = (e: any, currentTab: string): void => {
     userMenu.menuIsOpen && setUserMenu({ menuId: null, menuIsOpen: false });
     filterPosition.current =
-      e.clientX - (pageRef.current.offsetLeft + (900 / 1440) * 100);
+      pageRef.current 
+        ? e.clientX - (pageRef.current.offsetLeft + (900 / 1440) * 100)
+        : 0;
     console.log(e);
 
     if (showFilter.showFilter === false) {
@@ -68,13 +77,15 @@ const Dashboard = () => {
   ] = useState(
     Math.ceil(users.length / parseInt(String(paginatedResults), 10))
   );
-  const [navMenuBtn, setNavMenuBtn] = useState(
-    window.innerWidth < 1080 ? true : false
-  );
+  const [navMenuBtn, setNavMenuBtn] = useState(true);
+  const [navState, setNavState] = useState(false);
 
-  const [navState, setNavState] = useState(
-    window.innerWidth < 1080 ? false : true
-  );
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setNavMenuBtn(window.innerWidth < 1080);
+      setNavState(window.innerWidth >= 1080);
+    }
+  }, []);
 
   const paging: (number | string)[] = useMemo(() => {
     let pagingArray: any = [1, 2, "...", 9, 10];
@@ -179,14 +190,26 @@ const Dashboard = () => {
   }, [paginatedResults]);
 
   return (
-    <DashboardLayout
-      data-testid="dashboard"
-      handleMenuBtn={handleMenuBtn}
-      navState={navState}
-    >
+    <div data-testid="dashboard">
       {isLoading && (
-        <div className={styles.container}>
-          <p>Loading Users...</p>
+        <div className={styles.superior_cont}>
+          <div className={styles.container}>
+            <p className={styles.page_title}>Users</p>
+            <div className={styles.users_summary_cont}>
+              <div className={styles.users_summary}>
+                {[1, 2, 3, 4].map((info, index) => (
+                  <div key={index} className={styles.users_summary_card}>
+                    <Skeleton width="40px" height="40px" />
+                    <div className={styles.users_summary_card_text}>
+                      <Skeleton width="80px" height="12px" />
+                      <Skeleton width="60px" height="16px" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <SkeletonTable rows={10} columns={6} />
+          </div>
         </div>
       )}
       {error && (
@@ -355,14 +378,15 @@ const Dashboard = () => {
                                 styles.orgName,
                               ].join(" ")}
                             >
-                              {index}
                               {user.orgName}
                             </span>
                           </td>
                           <td>
-                            <span className={styles.table_data}>
-                              {user.userName}
-                            </span>
+                            <Link href={`/dashboard/users/${user.id}`} className={styles.usernameLink}>
+                              <span className={styles.table_data}>
+                                {user.userName}
+                              </span>
+                            </Link>
                           </td>
                           <td>
                             <span className={styles.table_data}>
@@ -395,7 +419,7 @@ const Dashboard = () => {
                                   className={styles.user_menu}
                                   id="user_menu"
                                 >
-                                  <Link href={`/dashboard/users/${index + 1}`}>
+                                  <Link href={`/dashboard/users/${user.id}`}>
                                     <p>
                                         <Image
                                       width={14}
@@ -551,7 +575,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </div>
   );
 };
 
