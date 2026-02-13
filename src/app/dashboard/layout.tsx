@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import DashboardHeader from "../../components/dashboardHeader";
 import Sidebar from "../../components/sidebar";
+import layoutStyles from "../../styles/dashboardlayout.module.scss";
 import styles from "../../styles/dashboard.module.scss";
 
 interface DashboardLayoutProps {
@@ -9,10 +10,11 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className={styles.container}>
+    <div className={layoutStyles.container}>
       <DashboardHeader />
       <main className={styles.main_content}>
-        <Sidebar navState={true} />
+        {/* <main> */}
+       <Sidebar navState={true} />
         {children}
       </main>
     </div>

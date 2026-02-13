@@ -14,16 +14,30 @@ const Sidebar = ({ navState }: { navState: boolean }): ReactElement => {
     >
       <div className={styles.uppersection}>
         <div className={styles.section_navlink_org}>
-          <img 
+          <Image 
             className={styles.icon}
-            src={`/sidebar/switch-organization.svg`}
+            src={`/sidebar/organization.png`}
             alt="switch organization"
+            height={20}
+            width={20}
           />
           <p>Switch Organization</p>
-          <img className={styles.icon} src={`/sidebar/caret-down.svg`} alt="dropdown" />
-        </div>
+          <Image
+           className={styles.icon}
+          src={`/sidebar/caret-down.svg`} 
+          alt="dropdown" 
+          width={10}
+          height={6}
+           />
+          </div>
         <div className={styles.section_navlink}>
-          <img className={styles.icon} src={`/sidebar/dashboard.svg`} alt="dashboard" />
+          <Image
+            width={20}
+            height={20}
+          className={styles.icon}
+           src={`/sidebar/dashboard.svg`}
+          alt="dashboard"
+           />
           <p>Dashboard</p>
         </div>
       </div>
