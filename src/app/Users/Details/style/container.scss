@@ -4,6 +4,15 @@
   height: fit-content;
   flex: 1;
   overflow-y: auto;
+
+  @include media('sm', '<') {
+    width: 100%;
+    padding: 20px;
+  }
+
+  @include media('xs', '<') {
+    padding: 15px;
+  }
 }
 
 .users__container__header--nav {
@@ -111,6 +120,18 @@
   margin-top: 40px;
   padding: 30px;
   padding-bottom: 0;
+
+  @include media('sm', '<') {
+    margin-top: 30px;
+    padding: 20px;
+    padding-bottom: 0;
+  }
+
+  @include media('xs', '<') {
+    margin-top: 20px;
+    padding: 15px;
+    padding-bottom: 0;
+  }
 }
 
 .users__container__card--grid {
@@ -172,6 +193,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include media('sm', '<') {
+    border-left: none;
+    padding: 0 15px;
+  }
+
+  @include media('xs', '<') {
+    border-right: none;
+    border-left: none;
+    padding: 10px 0;
+  }
 }
 
 .users__container__card--rating-title {
@@ -215,6 +247,27 @@
   width: 100%;
   list-style: none;
   padding: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include media('sm', '<') {
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin-top: 30px;
+    padding-bottom: 5px;
+  }
+
+  @include media('xs', '<') {
+    gap: 10px;
+    grid-template-columns: repeat(6, minmax(80px, 1fr));
+    margin-top: 20px;
+  }
 }
 
 .users__container__card--route-item {

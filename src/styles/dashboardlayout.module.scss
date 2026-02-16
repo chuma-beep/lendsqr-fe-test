@@ -9,8 +9,8 @@
   main {
     display: flex;
     position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-x: visible;
     height: calc(100vh - 100px);
 
     @include g.mozilla-scrollbar;

@@ -72,6 +72,12 @@
     padding: 0 clamp(35px, 14%, 60px) 0 clamp(10px, 7%, 20px);
     font-family: g.$work-sans;
     outline-color: g.$tertiary-text-color;
+    background-color: transparent;
+    color: g.$primary-text-color;
+  }
+
+  .searchbox_input {
+   background-color: transparent;
   }
 
   button {
@@ -157,7 +163,11 @@
     gap: 10px;
 
     a {
-      color: g.$primary-text-color;
+    color: g.$primary-text-color;
+
+    &::placeholder {
+      color: g.$secondary-text-color;
+    }
       display: none;
     }
   }
@@ -185,6 +195,7 @@
   }
   .avatar {
     width: 100%;
+    height: 100%;
   }
   .arrow_down {
     width: 7.34px;

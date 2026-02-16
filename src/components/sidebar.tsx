@@ -48,11 +48,7 @@ const Sidebar = ({ navState }: { navState: boolean }): ReactElement => {
           {navSection[1].map((navLink: string, ind: number) => (
             <div
               key={navLink}
-              className={
-                navLink.toLocaleLowerCase() === "users"
-                  ? styles.section_active_navlink
-                  : styles.section_navlink
-              }
+              className={styles.section_navlink}
             >
               <Image
                   width={10}

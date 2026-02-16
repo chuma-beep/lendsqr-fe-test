@@ -165,15 +165,15 @@ const Dashboard = () => {
   return (
     <div data-testid="dashboard">
       {isLoading && (
-        <div className={styles.superior_cont}>
-          <div className={styles.container}>
-            <p className={styles.page_title}>Users</p>
-            <div className={styles.users_summary_cont}>
-              <div className={styles.users_summary}>
+        <div className={styles.dashboardWrapper}>
+          <div className={styles.pageContainer}>
+            <p className={styles.pageTitle}>Users</p>
+            <div className={styles.summaryContainer}>
+              <div className={styles.summaryGrid}>
                 {[1, 2, 3, 4].map((info, index) => (
-                  <div key={index} className={styles.users_summary_card}>
+                  <div key={index} className={styles.summaryCard}>
                     <Skeleton width="40px" height="40px" />
-                    <div className={styles.users_summary_card_text}>
+                    <div className={styles.summaryCardText}>
                       <Skeleton width="80px" height="12px" />
                       <Skeleton width="60px" height="16px" />
                     </div>
@@ -186,23 +186,24 @@ const Dashboard = () => {
         </div>
       )}
       {error && (
-        <div className={styles.container}>
+        <div className={styles.pageContainer}>
           <p>{error}</p>
         </div>
       )}
-{/* Display dashboard  */}
+
+      {/* Display dashboard */}
       {users && users.length > 0 && (
-        <div className={styles.superior_cont}>
-          <div className={styles.container} ref={pageRef}>
-            <p className={styles.page_title}>Users</p>
+        <div className={styles.dashboardWrapper}>
+          <div className={styles.pageContainer} ref={pageRef}>
+            <p className={styles.pageTitle}>Users</p>
 
             {/* Users summary section */}
-            <div className={styles.users_summary_cont}>
-              <div className={styles.users_summary}>
+            <div className={styles.summaryContainer}>
+              <div className={styles.summaryGrid}>
                 {usersSummary.map((info, index) => (
-                  <div key={index} className={styles.users_summary_card}>
+                  <div key={index} className={styles.summaryCard}>
                     <div
-                      className={styles.icon_cont}
+                      className={styles.iconContainer}
                     >
                       <Image
                         width={30}
@@ -214,8 +215,8 @@ const Dashboard = () => {
                         alt="icon"
                       />
                     </div>
-                    <p className={styles.summary_title}>{info.summary_name}</p>
-                    <p className={styles.summary_value}>
+                    <p className={styles.summaryLabel}>{info.summary_name}</p>
+                    <p className={styles.summaryValue}>
                       {info.value.toLocaleString("en-US")}
                     </p>
                   </div>
@@ -225,7 +226,7 @@ const Dashboard = () => {
 
             {/* Users table */}
 
-            <div className={styles.table_cont} data-testid="users-table">
+            <div className={styles.tableContainer} data-testid="users-table">
               <div className={styles.table}>
                 {/* Filter form */}
                 {showFilter.showFilter && (
@@ -319,7 +320,7 @@ const Dashboard = () => {
                                    unoptimized />
                       </span>
                     </th>
-                    <th></th>
+                    <th className={styles.actionHeader}></th>
                   </tr>
                   <tbody data-testid="table-body">
                     {usersToDisplay.map((user: userObject, index: number) => (
@@ -332,8 +333,8 @@ const Dashboard = () => {
                           <td>
                             <span
                               className={[
-                                styles.table_data,
-                                styles.orgName,
+                                styles.tableData,
+                                styles.organizationName,
                               ].join(" ")}
                             >
                               {user.orgName}
@@ -341,40 +342,40 @@ const Dashboard = () => {
                           </td>
                           <td>
                             <Link href={`/dashboard/users/${user.id}`} className={styles.usernameLink}>
-                              <span className={styles.table_data}>
+                              <span className={styles.tableData}>
                                 {user.userName}
                               </span>
                             </Link>
                           </td>
                           <td>
-                            <span className={styles.table_data}>
+                            <span className={styles.tableData}>
                               {user.email}
                             </span>
                           </td>
                           <td>
-                            <span className={styles.table_data}>
+                            <span className={styles.tableData}>
                               {user.phoneNumber}
                             </span>
                           </td>
                           <td>
-                            <span className={styles.table_data}>
+                            <span className={styles.tableData}>
                               {formatDate(new Date(user.createdAt))}
                             </span>
                           </td>
                           <td>
-                            <span className={styles.table_data}>
+                            <span className={styles.tableData}>
                               <UserStatus />
                             </span>
                           </td>
                           <td
-                            className={styles.action_btn_col}
-                            style={{ position: "relative" }}
-                          >
+                            className={`${styles.actionButtonColumn} ${styles.actionCell}`}
+                        
+      >
                             {/* User menu */}
                             {userMenu.menuId === index &&
                               userMenu.menuIsOpen && (
                                 <div
-                                  className={styles.user_menu}
+                                  className={styles.userMenu}
                                   id="user_menu"
                                 >
                                   <Link href={`/dashboard/users/${user.id}`}>
@@ -385,7 +386,7 @@ const Dashboard = () => {
                                       alt="view icon"
                                         src="/dashboard/view.svg"
                                         unoptimized />
-                                      <span className={styles.link_text}>
+                                      <span className={styles.linkText}>
                                         View Details
                                       </span>
                                     </p>
@@ -441,26 +442,26 @@ const Dashboard = () => {
             </div>
 
             {/* Pagination Bar */}
-            <div className={styles.pagination_bar}>
-              <div className={styles.page_results}>
+            <div className={styles.paginationBar}>
+              <div className={styles.pageResults}>
                 <span>Showing</span>{" "}
                 <Dropdown updatePaginatedResults={updatePaginatedResults} />{" "}
                 <span>out of 100</span>
               </div>
-              <div className={styles.pagination_cont}>
+              <div className={styles.paginationControls}>
                 <div
                   className={
                     pageNumber === 1
-                      ? styles.pagination_btn
-                      : styles.pagination_btn_active
+                      ? styles.paginationButton
+                      : styles.paginationButtonActive
                   }
                   onClick={() =>
                     pageNumber > 1 && setPageNumber((prev: number) => prev - 1)
                   }
                 >
-                  <Image className={styles.left} src="/dashboard/caret-down.svg" alt="previous" width={24} height={24} unoptimized />
+                  <Image className={styles.caretLeft} src="/dashboard/caret-down.svg" alt="previous" width={24} height={24} unoptimized />
                 </div>
-                <div className={styles.page_num_cont}>
+                <div className={styles.pageNumbersContainer}>
                   {totalPages < 5 ? (
                     Array(
                       Math.ceil(
@@ -473,8 +474,8 @@ const Dashboard = () => {
                           key={i}
                           className={
                             pageNumber === i + 1
-                              ? styles.page_num_btn_active
-                              : styles.page_num_btn
+                              ? styles.pageNumberButtonActive
+                              : styles.pageNumberButton
                           }
                           onClick={(e: React.MouseEvent<HTMLElement>) =>
                             setPageNumber(
@@ -486,7 +487,7 @@ const Dashboard = () => {
                         </button>
                       ))
                   ) : (
-                    <div className={styles.page_num_cont}>
+                    <div className={styles.pageNumbersContainer}>
                       {paging.map((p, i) => (
                         <button
                           key={i}
@@ -494,8 +495,8 @@ const Dashboard = () => {
                             p === "..."
                               ? styles.ellipses
                               : p === pageNumber
-                              ? styles.page_num_btn_active
-                              : styles.page_num_btn
+                              ? styles.pageNumberButtonActive
+                              : styles.pageNumberButton
                           }
                           onClick={(e: React.MouseEvent<HTMLElement>) =>
                             setPageNumber(
@@ -516,8 +517,8 @@ const Dashboard = () => {
                     Math.ceil(
                       users.length / parseInt(String(paginatedResults), 10)
                     )
-                      ? styles.pagination_btn
-                      : styles.pagination_btn_active
+                      ? styles.paginationButton
+                      : styles.paginationButtonActive
                   }
                   onClick={() => {
                     pageNumber + 1 <=
@@ -526,7 +527,7 @@ const Dashboard = () => {
                       ) && setPageNumber((prev: number) => prev + 1);
                   }}
                 >
-                  <Image className={styles.right} src="/dashboard/caret-down.svg" alt="next" width={24} height={24} unoptimized />
+                  <Image className={styles.caretRight} src="/dashboard/caret-down.svg" alt="next" width={24} height={24} unoptimized />
                 </div>
               </div>
             </div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+
 /* Hide scrollbars globally */
 * {
   scrollbar-width: none; /* Firefox */
@@ -6,4 +8,17 @@
 
 *::-webkit-scrollbar {
   display: none; /* WebKit browsers */
+}
+
+@font-face {
+  font-family: Avenir-bold;
+  src: url("../assets/fonts/Avenir-Bold.otf");
+}
+@font-face {
+  font-family: Avenir-italic;
+  src: url("../assets/fonts/Avenir-It.otf");
+}
+@font-face {
+  font-family: Avenir-regular;
+  src: url("../assets/fonts/Avenir-Regular.otf");
 }

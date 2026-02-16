@@ -2,9 +2,9 @@
 @use "./global" as g;
 
 .container {
-  width: 280px;
+  width: 240px;
   min-width: 240px;
-  max-width: 280px;
+  max-width: 240px;
   position: sticky;
   height: calc(100vh - 100px);
   left: 0;
@@ -23,6 +23,10 @@
     top: 0;
     height: 100vh;
     transform: translateX(0);
+    z-index: 10000;
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
   }
 
   @media (max-width: 768px) {
@@ -60,6 +64,7 @@
     min-width: 240px;
     max-width: 280px;
     transform: translateX(-100%);
+    z-index: 10000;
   }
 
   @media (max-width: 768px) {
@@ -120,6 +125,7 @@
     background: g.$primary-hover-bg;
   }
 }
+
 .section_navlink {
   display: flex;
   align-items: center;
@@ -143,7 +149,18 @@
 
   &:hover {
     opacity: 1;
-    background: g.$primary-hover-bg;
+    background: g.$active-nav-bg;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 3px;
+      height: 100%;
+      background: g.$tertiary-text-color;
+    }
   }
 }
 .icon {

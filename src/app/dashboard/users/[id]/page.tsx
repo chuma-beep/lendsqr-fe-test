@@ -14,12 +14,25 @@ export default function UserDetailsPage() {
   const userId = params?.id ? Number(params.id) : 1;
   const { userDetails, isLoading, error } = useFetchUserDetails(userId);
   const [user, setUser] = useState<userObject | null>(null);
+  const [fromStorage, setFromStorage] = useState(false);
 
   useEffect(() => {
     if (userDetails) {
       setUser(userDetails as userObject);
+      setFromStorage(false);
+      localStorage.setItem(`user_${userId}`, JSON.stringify(userDetails));
     }
-  }, [userDetails]);
+  }, [userDetails, userId]);
+
+  useEffect(() => {
+    if (!userDetails && !isLoading) {
+      const stored = localStorage.getItem(`user_${userId}`);
+      if (stored) {
+        setUser(JSON.parse(stored));
+        setFromStorage(true);
+      }
+    }
+  }, [userDetails, isLoading, userId]);
 
   if (isLoading) {
     return (
@@ -40,6 +53,11 @@ export default function UserDetailsPage() {
 
   return (
     <div className="users__details__container">
+      {fromStorage && (
+        <p style={{ fontSize: '12px', color: '#888', marginBottom: '10px' }}>
+          Showing cached data
+        </p>
+      )}
       <header className="users__container__header--nav">
         <button onClick={() => router.back()}>
           <span className="users__container__header--icon">&larr;</span>

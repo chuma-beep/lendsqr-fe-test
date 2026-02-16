@@ -27,7 +27,8 @@ export default function DashboardHeader({ onMenuToggle, showMenuBtn, sidebarOpen
       />
       
       <div className={styles.searchbox} data-testid="search-box">
-        <input type="text" name="search" placeholder="Search for anything" />
+        <input type="text" name="search" placeholder="Search for anything" className={styles.search_input
+        } />
         <button type="button">
           <Image src="/dashboard/search-icon.svg" alt="search-icon" width={14} height={14} unoptimized />
         </button>
