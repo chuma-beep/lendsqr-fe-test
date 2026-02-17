@@ -78,7 +78,7 @@ export default function UserDetailsPage() {
           <div className="users__container__card--profile">
             {user.profile?.avatar ? (
               <Image
-                src={user.profile.avatar}
+                src="/avatar-1.png"
                 alt="avatar"
                 width={80}
                 height={80}
@@ -102,7 +102,15 @@ export default function UserDetailsPage() {
             <h4 className="users__container__card--rating-title">User&apos;s Tier</h4>
             <div>
               {[1, 2, 3].map((star) => (
-                <span key={star}>★</span>
+                <span key={star}>
+                  <Image
+                    src="/star.png"
+                    alt="star"
+                    width={14}
+                    height={14}
+                    unoptimized
+                  />
+                </span>
               ))}
             </div>
           </div>
